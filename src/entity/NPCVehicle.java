@@ -1,4 +1,4 @@
-package src.entity;
+package entity;
 
 //Will implement this later when benchmark is finished
 
