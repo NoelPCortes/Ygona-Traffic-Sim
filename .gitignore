@@ -1,0 +1,12 @@
+# Ignore the entire IntelliJ settings folder
+.idea/
+
+# Ignore all IntelliJ module files
+*.iml
+
+# Ignore the entire build/output folder (where the .class files are)
+out/
+bin/
+
+# Ignore VS Code specific settings if they exist
+.vscode/
