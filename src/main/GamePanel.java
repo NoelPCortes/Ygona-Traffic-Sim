@@ -1,5 +1,7 @@
 package src.main;
 
+import src.entity.Player;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,22 +11,17 @@ public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16; //16x16 tile
     final int scale = 2;
 
-    final int tileSize = originalTileSize * scale; //32x32 tile
-    final int maxScreenCol = 12;
-    final int maxScreenRow = 24;
-    final int screenWidth = tileSize * maxScreenCol; // 384 pixels
-    final int screenHeight = tileSize * maxScreenRow; //768 pixels
+    public final int tileSize = originalTileSize * scale; //32x32 tile
+    public final int maxScreenCol = 12;
+    public final int maxScreenRow = 24;
+    public final int screenWidth = tileSize * maxScreenCol; // 384 pixels
+    public final int screenHeight = tileSize * maxScreenRow; //768 pixels
 
-    // FPS
     int FPS = 60;
 
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
-
-    // Set player's default position
-    int playerX = 100;
-    int playerY = 100;
-    int playerSpeed = 4;
+    Player player = new Player(this, keyH);
 
     //SETS SCREEN
     public GamePanel() {
@@ -44,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     @Override
     public void run(){
-        double drawInterval = 1000000000/FPS; // draw the screen for 0.0166666 seconds
+        double drawInterval = 1_000_000_000/FPS; // draw the screen for 0.0166666 seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
 
         while(gameThread != null) {
@@ -52,7 +49,7 @@ public class GamePanel extends JPanel implements Runnable {
             // update information such as character positions
             update();
             // draw the screen with the updated information
-            repaint();
+            repaint();//Calls paintComponent()
         
             try {
                 double remainingTime = nextDrawTime - System.nanoTime(); // time remaining until nextDrawTime
@@ -74,25 +71,18 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        if(keyH.upPressed == true) {
-            playerY -= playerSpeed;
-        } 
 
-        // stops from moving off the top of screen
-        if(playerY < 0) {
-            playerY = 0;
-        }
+        player.update();
+
     }
 
     public void paintComponent(Graphics g) {
         
         super.paintComponent(g);
 
-        Graphics g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D)g;
 
-        g2.setColor(Color.white);
-
-        g2.fillRect(playerX, playerY, tileSize, tileSize);
+        player.draw(g2);
 
         g2.dispose();
     }

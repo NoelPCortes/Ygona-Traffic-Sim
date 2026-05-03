@@ -1,4 +1,6 @@
-package src.main;
+package src.entity;
+
+//Will implement this later when benchmark is finished
 
 public class NPCVehicle {
     // Position of NPC car on screen
