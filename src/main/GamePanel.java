@@ -1,6 +1,7 @@
 package main;
 
 import entity.Player;
+import tile.Road;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,11 +10,11 @@ public class GamePanel extends JPanel implements Runnable {
 
     //SCREEN SETTINGS
     final int originalTileSize = 16; //16x16 tile
-    final int scale = 2;
+    final int scale = 4;
 
     public final int tileSize = originalTileSize * scale; //32x32 tile
-    public final int maxScreenCol = 12;
-    public final int maxScreenRow = 24;
+    public final int maxScreenCol = 8;
+    public final int maxScreenRow = 12;
     public final int screenWidth = tileSize * maxScreenCol; // 384 pixels
     public final int screenHeight = tileSize * maxScreenRow; //768 pixels
 
@@ -21,6 +22,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
+    
+    Road road = new Road(this);
     Player player = new Player(this, keyH);
 
     //SETS SCREEN
@@ -82,6 +85,7 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D)g;
 
+        road.draw(g2);
         player.draw(g2);
 
         g2.dispose();
