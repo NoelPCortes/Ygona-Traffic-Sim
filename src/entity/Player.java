@@ -11,11 +11,10 @@ import java.io.IOException;
 public class Player extends Entity {
 
     KeyHandler keyH;
-    GamePanel gp;
 
     public Player(GamePanel gp, KeyHandler keyH){
-
-        this.gp = gp;
+        
+        super(gp);
         this.keyH = keyH;
 
         setDefaultValues();
