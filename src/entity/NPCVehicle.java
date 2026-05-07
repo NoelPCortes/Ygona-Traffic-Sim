@@ -5,8 +5,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import main.GamePanel;
 
-//Will implement this later when benchmark is finished
-
 public class NPCVehicle extends Entity{
 
     public BufferedImage carRight, carLeft;

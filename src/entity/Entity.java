@@ -24,7 +24,7 @@ public class Entity {
 
         BufferedImage image = null;
 
-        int width = (int) (gp.tileSize * 0.8);
+        int width = (int) (gp.tileSize * 1.5);
         int height = (int) (gp.tileSize * 1.5);
 
         if (car != null) {
