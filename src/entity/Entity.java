@@ -15,18 +15,17 @@ public class Entity {
 
     public String direction = "RIGHT";
 
+    public int width;
+    public int height;
+
     public Entity(GamePanel gp) {
         this.gp = gp;
+
+        this.width = (int)(gp.tileSize * 0.8);
+        this.height = (int)(gp.tileSize * 1.5);
     }
 
     public void draw(Graphics2D g2) {
-          // switch direction and sprite
-
-        BufferedImage image = null;
-
-        int width = (int) (gp.tileSize * 0.8);
-        int height = (int) (gp.tileSize * 1.5);
-
         if (car != null) {
             g2.drawImage(car, x, y, width, height, null);
         } else {

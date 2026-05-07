@@ -49,14 +49,8 @@ public class Player extends Entity {
 
     }
 
+    @Override
     public void draw(Graphics2D g2) {
-
-        //g2.setColor(Color.WHITE);
-        //g2.fillRect(x, y, gp.tileSize, gp.tileSize);
-
-        int width = (int) (gp.tileSize * 0.8);
-        int height = (int) (gp.tileSize * 1.5);
-
         if (car != null) {
             g2.drawImage(car, x, y, width, height, null);
         } else {
