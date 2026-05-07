@@ -32,7 +32,7 @@ public class Player extends Entity {
     public void getPlayerImage() {
         try {
 
-            car = ImageIO.read(getClass().getResourceAsStream("/res/playerSprite/Car3.png"));
+            car = ImageIO.read(getClass().getResourceAsStream("/playerSprite/Car3.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
