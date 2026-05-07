@@ -5,7 +5,6 @@ import main.KeyHandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Player extends Entity {
@@ -33,7 +32,7 @@ public class Player extends Entity {
     public void getPlayerImage() {
         try {
 
-            car = ImageIO.read(getClass().getResourceAsStream("/playerSprite/Car3.png"));
+            car = ImageIO.read(getClass().getResourceAsStream("/res/playerSprite/Car3.png"));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -42,6 +41,11 @@ public class Player extends Entity {
     }
 
     public void update() {
+
+        //Spawns player to starting position if it reaches out of bounds
+        if(y < 0){
+            y = gp.tileSize * 10;
+        }
 
         if(keyH.upPressed == true) {
             y -= speed;
