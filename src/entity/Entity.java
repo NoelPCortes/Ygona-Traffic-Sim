@@ -18,9 +18,6 @@ public class Entity {
 
     public Entity(GamePanel gp) {
         this.gp = gp;
-
-        this.width = (int)(gp.tileSize * 1.5);
-        this.height = (int)(gp.tileSize * 1.5);
     }
 
     public void draw(Graphics2D g2) {

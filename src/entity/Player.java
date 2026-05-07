@@ -25,6 +25,8 @@ public class Player extends Entity {
         //Sets player position in the middle
         x = gp.tileSize * 3 + (gp.tileSize / 2);
         y = gp.tileSize * 10;
+        width = (int)(gp.tileSize * 0.8);
+        height = (int)(gp.tileSize * 1.5);
         speed = 4;
 
     }

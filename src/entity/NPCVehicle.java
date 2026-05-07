@@ -28,6 +28,8 @@ public class NPCVehicle extends Entity{
 
     public void setDefaultValue() {
         speed = 1;
+        width = (int)(gp.tileSize * 1.5);
+        height = (int)(gp.tileSize * 1.5);
     }
     
 
