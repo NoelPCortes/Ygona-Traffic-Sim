@@ -4,7 +4,6 @@ import main.GamePanel;
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -95,9 +94,6 @@ public class Road {
 
             if(tile[tileNum] != null && tile[tileNum].image != null) {
                 g2.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null);
-            } else {
-                g2.setColor(Color.BLACK);
-                g2.fillRect(x, y, gp.tileSize, gp.tileSize);
             }
 
             col++;

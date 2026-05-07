@@ -5,21 +5,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import main.GamePanel;
 
-//Will implement this later when benchmark is finished
-
 public class NPCVehicle extends Entity{
 
-    public static BufferedImage carRight, carLeft;
-    private static boolean imagesLoaded = false;
+    public BufferedImage carRight, carLeft;
 
     public NPCVehicle(GamePanel gp) {
         super(gp);
-
-        if(!imagesLoaded) {
-            getNPCVehicleImage();
-        }
-
         setDefaultValue();
+        getNPCVehicleImage();
     }
 
     public void getNPCVehicleImage() {
@@ -27,7 +20,6 @@ public class NPCVehicle extends Entity{
 
             carRight = ImageIO.read(getClass().getResourceAsStream("/npc/leftToRightNpcCar.png"));
             carLeft = ImageIO.read(getClass().getResourceAsStream("/npc/rightToLeftNpcCar.png"));
-            imagesLoaded = true;
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -36,12 +28,6 @@ public class NPCVehicle extends Entity{
 
     public void setDefaultValue() {
         speed = 1;
-
-        if(direction.equals("RIGHT")) {
-            car = carRight;
-        } else {
-            car = carLeft;
-        }
     }
     
 

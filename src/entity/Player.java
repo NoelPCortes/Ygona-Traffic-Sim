@@ -53,8 +53,8 @@ public class Player extends Entity {
 
     }
 
-    @Override
     public void draw(Graphics2D g2) {
+
         if (car != null) {
             g2.drawImage(car, x, y, width, height, null);
         } else {

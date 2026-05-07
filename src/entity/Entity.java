@@ -11,12 +11,10 @@ public class Entity {
     public int x, y;
     public int speed;
 
+    public int width, height; 
+
     public BufferedImage car;
-
     public String direction = "RIGHT";
-
-    public int width;
-    public int height;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
