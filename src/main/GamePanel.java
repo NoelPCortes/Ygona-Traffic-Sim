@@ -1,7 +1,8 @@
 package main;
 
 import entity.Player;
-
+import tile.Road;
+import entity.NPCVehicle;
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,11 +10,11 @@ public class GamePanel extends JPanel implements Runnable {
 
     //SCREEN SETTINGS
     final int originalTileSize = 16; //16x16 tile
-    final int scale = 2;
+    final int scale = 4;
 
     public final int tileSize = originalTileSize * scale; //32x32 tile
-    public final int maxScreenCol = 12;
-    public final int maxScreenRow = 24;
+    public final int maxScreenCol = 8;
+    public final int maxScreenRow = 12;
     public final int screenWidth = tileSize * maxScreenCol; // 384 pixels
     public final int screenHeight = tileSize * maxScreenRow; //768 pixels
 
@@ -21,8 +22,12 @@ public class GamePanel extends JPanel implements Runnable {
 
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
-    Player player = new Player(this, keyH);
-
+    
+    public Road road = new Road(this);
+    public Player player = new Player(this, keyH);
+    public AssetSetter aSetter = new AssetSetter(this);
+    public NPCVehicle[] npcVehicle = new NPCVehicle[10];
+    
     //SETS SCREEN
     public GamePanel() {
 
@@ -31,7 +36,13 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+        
+        setupGame();
 
+    }
+
+    public void setupGame() {
+        aSetter.setNPCVehicle();
     }
 
     public void startGameThread(){
@@ -74,6 +85,12 @@ public class GamePanel extends JPanel implements Runnable {
 
         player.update();
 
+        for(int i = 0; i < npcVehicle.length; i++) {
+            if(npcVehicle[i] != null) {
+                npcVehicle[i].update();
+            }
+        }
+
     }
 
     public void paintComponent(Graphics g) {
@@ -82,7 +99,22 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D)g;
 
+        long drawStart = 0;
+        drawStart = System.nanoTime();
+
+        road.draw(g2);
+
         player.draw(g2);
+        // NPC VEhicle
+        for(int i = 0; i < npcVehicle.length; i++) {
+            if(npcVehicle[i] != null) {
+                npcVehicle[i].draw(g2);
+            }
+        }
+
+        // not yet used
+        long drawEnd = System.nanoTime();
+        long passed = drawEnd - drawStart;
 
         g2.dispose();
     }

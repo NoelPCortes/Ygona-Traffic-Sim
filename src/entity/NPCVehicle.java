@@ -1,52 +1,47 @@
 package entity;
 
-//Will implement this later when benchmark is finished
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import main.GamePanel;
 
-public class NPCVehicle {
-    // Position of NPC car on screen
-    private int x;
-    private int y;
+public class NPCVehicle extends Entity{
 
-    //movement speed of NCP car
-    private int speed;
+    public BufferedImage carRight, carLeft;
 
-    //Direction of NPC car (Left or Right)
-    private String direction;
+    public NPCVehicle(GamePanel gp) {
+        super(gp);
+        setDefaultValue();
+        getNPCVehicleImage();
+    }
 
-    private boolean isNPCCarActive;
+    public void getNPCVehicleImage() {
+        try {
+
+            carRight = ImageIO.read(getClass().getResourceAsStream("/npc/leftToRightNpcCar.png"));
+            carLeft = ImageIO.read(getClass().getResourceAsStream("/npc/rightToLeftNpcCar.png"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setDefaultValue() {
+        speed = 1;
+        width = (int)(gp.tileSize * 1.5);
+        height = (int)(gp.tileSize * 1.5);
+    }
     
-    public NPCVehicle(int x, int y, int speed, String direction) {
-        this.x = x;
-        this.y = y;
-        this.speed = speed;
-        this.direction = direction;
-        this.isNPCCarActive = true; // active when spawned
-    }
 
-    // handles movement logic of npc car
-    public void move() {
-        
-    }
-
-    // updates npc car every frame
     public void update() {
-
+        if(direction.equals("RIGHT")) {
+            x += speed;
+            car = carRight;
+        } else if(direction.equals("LEFT")) {
+            x -= speed;
+            car = carLeft;
+        }
     }
+    
 
-    // draw npc car
-    public void render() {
-
-    }
-
-    public int getNpcCarPositionX() {
-        return x;
-    }
-
-    public int getNpcCarPositionY() {
-        return y;
-    }
-
-    public boolean isActive() {
-        return isNPCCarActive;
-    }
 }
