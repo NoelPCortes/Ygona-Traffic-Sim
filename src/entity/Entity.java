@@ -21,7 +21,7 @@ public class Entity {
     public Entity(GamePanel gp) {
         this.gp = gp;
 
-        this.width = (int)(gp.tileSize * 0.8);
+        this.width = (int)(gp.tileSize * 1.5);
         this.height = (int)(gp.tileSize * 1.5);
     }
 
