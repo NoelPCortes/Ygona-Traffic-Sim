@@ -35,11 +35,19 @@ public class NPCVehicle extends Entity{
 
     public void update() {
         if(direction.equals("RIGHT")) {
-            x += speed;
             car = carRight;
         } else if(direction.equals("LEFT")) {
-            x -= speed;
             car = carLeft;
+        }
+
+        if (!gp.sign.getCurrentSign().equals("RED")) {
+            return; 
+        }
+
+        if(direction.equals("RIGHT")) {
+            x += speed;
+        } else if(direction.equals("LEFT")) {
+            x -= speed;
         }
     }
     

@@ -3,6 +3,7 @@ package main;
 import entity.Player;
 import tile.Road;
 import entity.NPCVehicle;
+import entity.TrafficLight;
 import javax.swing.*;
 import java.awt.*;
 
@@ -27,6 +28,8 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyH);
     public AssetSetter aSetter = new AssetSetter(this);
     public NPCVehicle[] npcVehicle = new NPCVehicle[10];
+    public SignManager sign = new SignManager(this);
+    public TrafficLight trafficLight = new TrafficLight(this, tileSize * 6, tileSize * 2);
     
     //SETS SCREEN
     public GamePanel() {
@@ -90,7 +93,7 @@ public class GamePanel extends JPanel implements Runnable {
                 npcVehicle[i].update();
             }
         }
-
+        sign.update();
     }
 
     public void paintComponent(Graphics g) {
@@ -111,6 +114,8 @@ public class GamePanel extends JPanel implements Runnable {
                 npcVehicle[i].draw(g2);
             }
         }
+
+        trafficLight.draw(g2);
 
         // not yet used
         long drawEnd = System.nanoTime();
