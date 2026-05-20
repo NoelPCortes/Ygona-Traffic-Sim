@@ -48,11 +48,6 @@ public class Player extends Entity {
         if(y < 0){
             y = gp.tileSize * 10;
         }
-
-        if(keyH.upPressed == true) {
-            y -= speed;
-        }
-
     }
 
     public void draw(Graphics2D g2) {

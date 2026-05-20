@@ -91,9 +91,21 @@ public class Road {
         while(col < gp.maxScreenCol && row < gp.maxScreenRow) {
 
             int tileNum = mapTileNum[col][row];
+            int drawY;
+
+            if(col == 3 || col == 4) {
+                // south and north road tiles illusion
+                drawY = (row * gp.tileSize + gp.worldY) % (gp.tileSize * gp.maxScreenRow);
+
+                if(drawY < 0) {
+                    drawY += gp.tileSize * gp.maxScreenRow;
+                }
+            } else {
+                drawY = row * gp.tileSize; // then sidewalks and crosswalk stay locked in place
+            }
 
             if(tile[tileNum] != null && tile[tileNum].image != null) {
-                g2.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null);
+                g2.drawImage(tile[tileNum].image, x, drawY, gp.tileSize, gp.tileSize, null);
             }
 
             col++;
@@ -103,7 +115,6 @@ public class Road {
                 col = 0;
                 x = 0;
                 row++;
-                y += gp.tileSize;
             }
         }
 
