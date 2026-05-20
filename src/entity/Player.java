@@ -22,11 +22,11 @@ public class Player extends Entity {
 
     public void setDefaultValues() {
 
-        //Sets player position in the middle
-        x = gp.tileSize * 3 + (gp.tileSize / 2);
-        y = gp.tileSize * 10;
         width = (int)(gp.tileSize * 0.8);
         height = (int)(gp.tileSize * 1.5);
+        //Sets player position in the right lane (column 4) centered
+        x = gp.tileSize * 4 + (gp.tileSize - width) / 2;
+        y = gp.tileSize * 10;
         speed = 4;
 
     }
@@ -43,9 +43,22 @@ public class Player extends Entity {
     }
 
     public void update() {
+        // Lateral lane-steering movement
+        if(keyH.leftPressed) {
+            x -= speed;
+            if(x < gp.tileSize * 3 + 4) {
+                x = gp.tileSize * 3 + 4;
+            }
+        }
+        if(keyH.rightPressed) {
+            x += speed;
+            if(x > gp.tileSize * 5 - width - 4) {
+                x = gp.tileSize * 5 - width - 4;
+            }
+        }
 
-        //Spawns player to starting position if it reaches out of bounds
-        if(y < 0){
+        //Spawns player to starting position if it reaches out of bounds (past the intersection)
+        if(y < gp.tileSize * 2){
             y = gp.tileSize * 10;
         }
     }

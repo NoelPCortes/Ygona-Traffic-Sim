@@ -1,16 +1,15 @@
 package main;
 
 public class SignManager {
-    GamePanel gp; 
+    GamePanel gp;
 
     private String currentSign = "GREEN";
     private int timer = 0;
 
-    // Constants for durations in frames (at 60 FPS)
-    public static final int GREEN_TIME = 600;   // 10 seconds
-    public static final int YELLOW_TIME = 180;  // 3 seconds
+    public static final int GREEN_TIME = 600; // 10 seconds
+    public static final int YELLOW_TIME = 180; // 3 seconds
     public static final int ALL_RED_TIME = 120; // 2 seconds (clearance pause)
-    public static final int RED_TIME = 480;     // 8 seconds (NPC crossing)
+    public static final int RED_TIME = 480; // 8 seconds (NPC crossing)
 
     public SignManager(GamePanel gp) {
         this.gp = gp;
@@ -64,7 +63,8 @@ public class SignManager {
     }
 
     public boolean canNPCMove() {
-        // NPCs are only allowed to move during the active RED crossing phase, NOT the ALL_RED clearance phase
+        // NPCs are only allowed to move during the active RED crossing phase, NOT the
+        // ALL_RED clearance phase
         int activeNPCStart = GREEN_TIME + YELLOW_TIME + ALL_RED_TIME;
         int activeNPCEnd = GREEN_TIME + YELLOW_TIME + ALL_RED_TIME + RED_TIME;
         return timer >= activeNPCStart && timer < activeNPCEnd;

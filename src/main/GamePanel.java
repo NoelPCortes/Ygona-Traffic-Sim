@@ -87,11 +87,19 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        // if forward then move world down for illusion, only when light is NOT RED
-        if (keyH.upPressed && !sign.getCurrentSign().equals("RED")) {
-            worldY += player.speed;
+        int currentSpeed = 2; // Default cruising drift speed
+        if (keyH.upPressed) {
+            currentSpeed = 5; // Fast acceleration
+        } else if (keyH.downPressed) {
+            currentSpeed = 0; // Brake to a complete stop
         }
+        worldY += currentSpeed;
 
+        if (sign.getCurrentSign().equals("RED")) {
+            player.y -= currentSpeed;
+        } else {
+            player.y = tileSize * 10;
+        }
         player.update();
 
         for (int i = 0; i < npcVehicle.length; i++) {
