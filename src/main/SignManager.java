@@ -34,7 +34,11 @@ public class SignManager {
             }
         } else {
             timer = 0; // Reset cycle
+            }
+        if (gp.road != null && gp.road.pedestrianLane != null) {
+            gp.road.pedestrianLane.update();
         }
+        
     }
 
     private void spawnNPCs() {

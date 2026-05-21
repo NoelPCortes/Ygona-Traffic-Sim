@@ -1,18 +1,18 @@
 package tile;
 
-import main.GamePanel;
-import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import javax.imageio.ImageIO;
+import main.GamePanel;
 
 public class Road {
     GamePanel gp;
     public Tile[] tile;
     int mapTileNum[][];
+    public PedestrianLane pedestrianLane;
 
     public Road(GamePanel gp) {
         this.gp = gp;
@@ -20,6 +20,8 @@ public class Road {
         mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
         getTileImage();
         loadMap("/map/map.txt");
+
+        this.pedestrianLane = new PedestrianLane(gp, this);
     }
 
     public void getTileImage() {
@@ -42,6 +44,8 @@ public class Road {
             tile[5] = new Tile();
             tile[5].image = ImageIO.read(getClass().getResourceAsStream("/tiles/leftVerticalSidewalk.png"));
 
+            tile[6] = new Tile();
+            tile[6].image = ImageIO.read(getClass().getResourceAsStream("/tiles/crosswalk.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -82,6 +86,7 @@ public class Road {
     }
 
     public void draw(Graphics2D g2) {
+    
 
         int col = 0;
         int row = 0;
@@ -93,7 +98,7 @@ public class Road {
             int tileNum = mapTileNum[col][row];
             int drawY;
 
-            if(col == 3 || col == 4) {
+            if((col == 3 || col == 4)&& row != 10)  {
                 // south and north road tiles illusion
                 drawY = (row * gp.tileSize + gp.worldY) % (gp.tileSize * gp.maxScreenRow);
 

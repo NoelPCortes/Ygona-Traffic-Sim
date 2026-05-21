@@ -1,11 +1,11 @@
 package main;
 
-import entity.Player;
-import tile.Road;
 import entity.NPCVehicle;
+import entity.Player;
 import entity.TrafficLight;
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
+import tile.Road;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -32,6 +32,7 @@ public class GamePanel extends JPanel implements Runnable {
     public NPCVehicle[] npcVehicle = new NPCVehicle[10];
     public SignManager sign = new SignManager(this);
     public TrafficLight trafficLight = new TrafficLight(this, tileSize * 6, tileSize * 2);
+    public SignManager signManager;
 
     // SETS SCREEN
     public GamePanel() {
@@ -41,6 +42,8 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+        this.signManager = new SignManager(this);
+        this.road = new Road(this);
 
         setupGame();
 
@@ -117,6 +120,8 @@ public class GamePanel extends JPanel implements Runnable {
         Graphics2D g2 = (Graphics2D) g;
 
         road.draw(g2);
+        
+        road.pedestrianLane.drawPedestrians(g2, 10 * tileSize);
 
         player.draw(g2);
         // NPC VEhicle - draw only if active
