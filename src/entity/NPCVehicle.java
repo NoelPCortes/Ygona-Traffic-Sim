@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -7,13 +8,21 @@ import main.GamePanel;
 
 public class NPCVehicle extends Entity {
 
+    GamePanel gp;
+
     public BufferedImage carRight, carLeft;
     public boolean active = false;
 
     public NPCVehicle(GamePanel gp) {
-        super(gp);
+        this.gp = gp;
         setDefaultValue();
         getNPCVehicleImage();
+
+        solidArea = new Rectangle();
+        solidArea.x = worldX;
+        solidArea.y = worldY;
+        solidArea.width = (int) (gp.tileSize * 1.5);
+        solidArea.height = (int) (gp.tileSize * 1.5) - 64;
     }
 
     public void getNPCVehicleImage() {
@@ -51,16 +60,19 @@ public class NPCVehicle extends Entity {
         }
 
         if (direction.equals("RIGHT")) {
-            x += speed;
-            if (x > gp.screenWidth) {
+            worldX += speed;
+            if (worldX > gp.screenWidth) {
                 active = false; // Despawn once off-screen
             }
         } else if (direction.equals("LEFT")) {
-            x -= speed;
-            if (x < -width) {
+            worldX -= speed;
+            if (worldX < -width) {
                 active = false; // Despawn once off-screen
             }
         }
+
+        solidArea.x = worldX;
+        solidArea.y = worldY + 32;
     }
 
 }

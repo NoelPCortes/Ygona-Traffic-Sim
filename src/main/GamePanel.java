@@ -13,19 +13,27 @@ public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16; // 16x16 tile
     final int scale = 4;
 
-    public final int tileSize = originalTileSize * scale; // 32x32 tile
+    public final int tileSize = originalTileSize * scale; // 64x64 tile
     public final int maxScreenCol = 8;
     public final int maxScreenRow = 12;
     public final int screenWidth = tileSize * maxScreenCol; // 384 pixels
     public final int screenHeight = tileSize * maxScreenRow; // 768 pixels
 
+    public int currentSpeed = 0;
     public int worldY = 0;
+
+    //WORLD SETTINGS
+    public final int maxWorldCol = 10;
+    public final int maxWorldRow = 32;
+    public final int worldWidth = tileSize * maxWorldCol;
+    public final int worldHeight = tileSize * maxWorldRow;
 
     int FPS = 60;
 
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
 
+    public CollisionChecker collisionChecker = new CollisionChecker(this);
     public Road road = new Road(this);
     public Player player = new Player(this, keyH);
     public AssetSetter aSetter = new AssetSetter(this);
@@ -87,18 +95,13 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update() {
-        int currentSpeed = 2; // Default cruising drift speed
-        if (keyH.upPressed) {
-            currentSpeed = 5; // Fast acceleration
-        } else if (keyH.downPressed) {
-            currentSpeed = 0; // Brake to a complete stop
-        }
-        worldY += currentSpeed;
 
         if (sign.getCurrentSign().equals("RED")) {
-            player.y -= currentSpeed;
+//            player.worldY -= currentSpeed;
+            currentSpeed = 0;
         } else {
-            player.y = tileSize * 10;
+//            player.worldY = tileSize * 10;
+            currentSpeed = 2;
         }
         player.update();
 

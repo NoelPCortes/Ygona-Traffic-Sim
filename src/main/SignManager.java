@@ -42,9 +42,9 @@ public class SignManager {
             if (gp.npcVehicle[i] != null) {
                 gp.npcVehicle[i].active = true;
                 if (gp.npcVehicle[i].direction.equals("RIGHT")) {
-                    gp.npcVehicle[i].x = -gp.npcVehicle[i].width;
+                    gp.npcVehicle[i].worldX = -gp.npcVehicle[i].width;
                 } else if (gp.npcVehicle[i].direction.equals("LEFT")) {
-                    gp.npcVehicle[i].x = gp.screenWidth;
+                    gp.npcVehicle[i].worldX = gp.screenWidth;
                 }
             }
         }
