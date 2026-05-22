@@ -25,16 +25,16 @@ public class AssetSetter {
     }
 
     public void setPedestrian() {
-        // Pedestrian 1: left to right
+        // Pedestrian 1: left to right 
         gp.pedestrians[0] = new Pedestrian(gp);
         gp.pedestrians[0].x = -gp.tileSize;
-        gp.pedestrians[0].y = gp.tileSize * 3;
+        gp.pedestrians[0].y = gp.tileSize * 7;
         gp.pedestrians[0].direction = "RIGHT";
 
-        // Pedestrian 2: right to left
+        // Pedestrian 2: right to left 
         gp.pedestrians[1] = new Pedestrian(gp);
         gp.pedestrians[1].x = gp.screenWidth;
-        gp.pedestrians[1].y = gp.tileSize * 3 + (gp.tileSize / 2);
+        gp.pedestrians[1].y = gp.tileSize * 7 + (gp.tileSize / 4);
         gp.pedestrians[1].direction = "LEFT";
     }
 }

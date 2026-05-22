@@ -23,8 +23,6 @@ public class Road {
         loadMap("/map/map.txt");
 
         this.pedestrianLane = new PedestrianLane(gp, this);
-
-        this.pedestrianLane.deployCrosswalk(0, gp.maxScreenCol - 1, 3);
     }
 
     public void getTileImage() {
@@ -101,7 +99,7 @@ public class Road {
             int tileNum = mapTileNum[col][row];
             int drawY;
 
-            if((col == 3 || col == 4)&& row != 10)  {
+            if ((col == 3 || col == 4) && row != 10 && row != 5 && row != 6 && tileNum != 6) {
                 // south and north road tiles illusion
                 drawY = (row * gp.tileSize + gp.worldY) % (gp.tileSize * gp.maxScreenRow);
 
@@ -109,7 +107,7 @@ public class Road {
                     drawY += gp.tileSize * gp.maxScreenRow;
                 }
             } else {
-                drawY = row * gp.tileSize; // then sidewalks and crosswalk stay locked in place
+                drawY = row * gp.tileSize; // sidewalks, crosswalk, and middle intersection stay locked in place
             }
 
             if(tile[tileNum] != null && tile[tileNum].image != null) {
@@ -126,5 +124,8 @@ public class Road {
             }
         }
 
+        if (pedestrianLane != null) {
+            pedestrianLane.draw(g2);
+        }
     }
 }
