@@ -123,6 +123,9 @@ public class GamePanel extends JPanel implements Runnable {
         }
 
         sign.update();
+        if (road != null && road.pedestrianLane != null) {
+            road.pedestrianLane.update();
+        }
     }
 
     public void paintComponent(Graphics g) {

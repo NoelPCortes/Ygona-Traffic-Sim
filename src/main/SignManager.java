@@ -35,6 +35,17 @@ public class SignManager {
         } else {
             timer = 0; // Reset cycle
         }
+
+        // Spawn/Despawn dynamic pedestrian lane based on active crossing timer
+        if (canNPCMove()) {
+            if (gp.road != null && gp.road.pedestrianLane != null) {
+                gp.road.pedestrianLane.spawnDynamicLane();
+            }
+        } else {
+            if (gp.road != null && gp.road.pedestrianLane != null) {
+                gp.road.pedestrianLane.despawnDynamicLane();
+            }
+        }
     }
 
     private void spawnNPCs() {
