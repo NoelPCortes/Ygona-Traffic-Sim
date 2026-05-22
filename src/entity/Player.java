@@ -57,6 +57,29 @@ public class Player extends Entity {
             }
         }
 
+        // COLLISION DETECTION WITH NPC VEHICLES
+        Rectangle playerHitbox = new Rectangle(x, y, width, height);
+
+        for(int i = 0; i < gp.npcVehicle.length; i++) {
+            if(gp.npcVehicle[i] != null && gp.npcVehicle[i].active) {
+
+                // Get the hitbox of the current active NPC car
+                Rectangle npcHitbox = new Rectangle(
+                        gp.npcVehicle[i].x,
+                        gp.npcVehicle[i].y,
+                        gp.npcVehicle[i].width,
+                        gp.npcVehicle[i].height
+                );
+
+                // Check if the two rectangles overlap
+                if(playerHitbox.intersects(npcHitbox)) {
+                    System.out.println("CRASH! You hit an NPC vehicle.");
+                    // Reset the player to their starting position
+                    setDefaultValues();
+                }
+            }
+        }
+
         //Spawns player to starting position if it reaches out of bounds (past the intersection)
         if(y < gp.tileSize * 2){
             y = gp.tileSize * 10;

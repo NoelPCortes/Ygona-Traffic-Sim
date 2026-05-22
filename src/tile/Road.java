@@ -18,10 +18,13 @@ public class Road {
         this.gp = gp;
         this.tile = new Tile[10];
         mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
+
         getTileImage();
         loadMap("/map/map.txt");
 
         this.pedestrianLane = new PedestrianLane(gp, this);
+
+        this.pedestrianLane.deployCrosswalk(0, gp.maxScreenCol - 1, 3);
     }
 
     public void getTileImage() {
