@@ -54,9 +54,7 @@ public class Player extends Entity {
             }
         }
 
-        // ==========================================
         // COLLISION DETECTION WITH NPC VEHICLES
-        // ==========================================
         Rectangle playerHitbox = new Rectangle(x, y, width, height);
 
         for(int i = 0; i < gp.npcVehicle.length; i++) {
@@ -79,7 +77,7 @@ public class Player extends Entity {
             }
         }
 
-        // Spawns player to starting position if it reaches out of bounds (past the intersection)
+        //Spawns player to starting position if it reaches out of bounds (past the intersection)
         if(y < gp.tileSize * 2){
             y = gp.tileSize * 10;
         }

@@ -38,6 +38,7 @@ public class SignManager {
     }
 
     private void spawnNPCs() {
+        // Spawn Vehicles
         for (int i = 0; i < gp.npcVehicle.length; i++) {
             if (gp.npcVehicle[i] != null) {
                 gp.npcVehicle[i].active = true;
@@ -48,12 +49,32 @@ public class SignManager {
                 }
             }
         }
+
+        // Spawn Pedestrians
+        for (int i = 0; i < gp.pedestrians.length; i++) {
+            if (gp.pedestrians[i] != null) {
+                gp.pedestrians[i].active = true;
+                if (gp.pedestrians[i].direction.equals("RIGHT")) {
+                    gp.pedestrians[i].x = -gp.pedestrians[i].width;
+                } else if (gp.pedestrians[i].direction.equals("LEFT")) {
+                    gp.pedestrians[i].x = gp.screenWidth;
+                }
+            }
+        }
     }
 
     private void despawnNPCs() {
+        // Despawn Vehicles
         for (int i = 0; i < gp.npcVehicle.length; i++) {
             if (gp.npcVehicle[i] != null) {
                 gp.npcVehicle[i].active = false;
+            }
+        }
+
+        // Despawn Pedestrians
+        for (int i = 0; i < gp.pedestrians.length; i++) {
+            if (gp.pedestrians[i] != null) {
+                gp.pedestrians[i].active = false;
             }
         }
     }

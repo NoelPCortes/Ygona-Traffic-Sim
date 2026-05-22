@@ -1,11 +1,12 @@
 package main;
 
-import entity.Player;
-import tile.Road;
 import entity.NPCVehicle;
+import entity.Pedestrian;
+import entity.Player;
 import entity.TrafficLight;
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
+import tile.Road;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -30,8 +31,10 @@ public class GamePanel extends JPanel implements Runnable {
     public Player player = new Player(this, keyH);
     public AssetSetter aSetter = new AssetSetter(this);
     public NPCVehicle[] npcVehicle = new NPCVehicle[10];
+    public Pedestrian[] pedestrians = new Pedestrian[10];
     public SignManager sign = new SignManager(this);
     public TrafficLight trafficLight = new TrafficLight(this, tileSize * 6, tileSize * 2);
+    public SignManager signManager;
 
     // SETS SCREEN
     public GamePanel() {
@@ -41,6 +44,8 @@ public class GamePanel extends JPanel implements Runnable {
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+        this.signManager = new SignManager(this);
+        this.road = new Road(this);
 
         setupGame();
 
@@ -48,6 +53,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setupGame() {
         aSetter.setNPCVehicle();
+        aSetter.setPedestrian();
     }
 
     public void startGameThread() {
@@ -102,11 +108,20 @@ public class GamePanel extends JPanel implements Runnable {
         }
         player.update();
 
+        // Update Vehicles
         for (int i = 0; i < npcVehicle.length; i++) {
             if (npcVehicle[i] != null) {
                 npcVehicle[i].update();
             }
         }
+
+        // Update Pedestrians
+        for (int i = 0; i < pedestrians.length; i++) {
+            if (pedestrians[i] != null) {
+                pedestrians[i].update();
+            }
+        }
+
         sign.update();
     }
 
@@ -116,19 +131,29 @@ public class GamePanel extends JPanel implements Runnable {
 
         Graphics2D g2 = (Graphics2D) g;
 
+        // Draw Map
         road.draw(g2);
 
+        // Draw Player
         player.draw(g2);
-        // NPC VEhicle - draw only if active
+
+        // Draw NPC Vehicles
         for (int i = 0; i < npcVehicle.length; i++) {
             if (npcVehicle[i] != null && npcVehicle[i].active) {
                 npcVehicle[i].draw(g2);
             }
         }
 
+        // Draw Pedestrians
+        for (int i = 0; i < pedestrians.length; i++) {
+            if (pedestrians[i] != null && pedestrians[i].active) {
+                pedestrians[i].draw(g2);
+            }
+        }
+
+        // Draw UI/Traffic Light
         trafficLight.draw(g2);
 
         g2.dispose();
     }
-
 }
