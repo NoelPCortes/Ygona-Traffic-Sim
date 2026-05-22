@@ -12,7 +12,7 @@ public class Player extends Entity {
     KeyHandler keyH;
 
     public Player(GamePanel gp, KeyHandler keyH){
-        
+
         super(gp);
         this.keyH = keyH;
 
@@ -33,13 +33,10 @@ public class Player extends Entity {
 
     public void getPlayerImage() {
         try {
-
             car = ImageIO.read(getClass().getResourceAsStream("/playerSprite/Car3.png"));
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void update() {
@@ -95,5 +92,4 @@ public class Player extends Entity {
             g2.fillRect(x, y, width, height);
         }
     }
-
 }
