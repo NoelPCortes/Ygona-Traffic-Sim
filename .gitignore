@@ -10,3 +10,5 @@ bin/
 
 # Ignore VS Code specific settings if they exist
 .vscode/
+
+*.log
